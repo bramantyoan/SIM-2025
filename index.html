@@ -187,7 +187,7 @@ hr { border: none; border-top: 1px solid var(--line); }
   <div class="section-head"><h2>Informasi Mata Kuliah</h2><div class="line"></div></div>
   <div class="info-row">
     <div class="info-card"><div class="lbl">Kode Matkul</div><div class="val">ASP4148</div></div>
-    <div class="info-card"><div class="lbl">Hari / Jam</div><div class="val">Rabu, 10.30 - 13.00</div><div></div>Rabu, 14.00 - 16.30</div></div>
+    <div class="info-card"><div class="lbl">Hari / Jam</div><div class="val">Rabu, 10.30 - 13.00</div><div class="val"></div>Rabu, 14.00 - 16.30</div></div>
     <div class="info-card"><div class="lbl">Ruang</div><div class="val">Gedung N</div></div>
     <div class="info-card"><div class="lbl">Dosen Pengampu</div><div class="val">Bramantyo Adi Nugroho</div></div>
   </div>
@@ -462,7 +462,7 @@ function alertFile(name) {
   // dengan URL file langsung, contoh:
   //   GitHub raw: https://github.com/username/repo/raw/main/slides/01.pptx
   //   Google Drive: https://drive.google.com/uc?export=download&id=FILE_ID
-  alert('📁 Untuk mengaktifkan download "' + name + '":\n\nGanti href="#" pada tombol ini dengan URL file Anda.\nContoh: GitHub raw link atau Google Drive share link.');
+  alert('Materi belum diupload oleh dosen');
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
