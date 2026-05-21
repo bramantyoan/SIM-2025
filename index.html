@@ -162,9 +162,9 @@ hr { border: none; border-top: 1px solid var(--line); }
 <nav>
   <a class="nav-logo" href="#">SIM — 2025/2026</a>
   <div class="nav-links">
+    <a href="#info">Info Matkul</a>
     <a href="#jadwal">Jadwal &amp; Materi</a>
     <a href="#tugas">Submit Tugas</a>
-    <a href="#info">Info Matkul</a>
   </div>
 </nav>
 
@@ -176,8 +176,8 @@ hr { border: none; border-top: 1px solid var(--line); }
     <div class="hero-stats">
       <div class="stat"><div class="stat-val">14</div><div class="stat-lbl">Pertemuan</div></div>
       <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">SKS</div></div>
-      <div class="stat"><div class="stat-val">2025</div><div class="stat-lbl">Tahun Ajaran</div></div>
-      <div class="stat"><div class="stat-val">Ganjil</div><div class="stat-lbl">Semester</div></div>
+      <div class="stat"><div class="stat-val">2025/2026</div><div class="stat-lbl">Tahun Ajaran</div></div>
+      <div class="stat"><div class="stat-val">Genap</div><div class="stat-lbl">Semester</div></div>
     </div>
   </div>
 </section>
@@ -186,16 +186,16 @@ hr { border: none; border-top: 1px solid var(--line); }
 <div class="container" id="info">
   <div class="section-head"><h2>Informasi Mata Kuliah</h2><div class="line"></div></div>
   <div class="info-row">
-    <div class="info-card"><div class="lbl">Kode Matkul</div><div class="val">MKK-SIM-301</div></div>
-    <div class="info-card"><div class="lbl">Hari / Jam</div><div class="val">Selasa 08:00</div></div>
-    <div class="info-card"><div class="lbl">Ruang</div><div class="val">Gedung A · R.204</div></div>
-    <div class="info-card"><div class="lbl">Dosen Pengampu</div><div class="val">[Nama Dosen]</div></div>
+    <div class="info-card"><div class="lbl">Kode Matkul</div><div class="val">ASP4148</div></div>
+    <div class="info-card"><div class="lbl">Hari / Jam</div><div class="val">Rabu 10.30 - 13.00; Rabu 14.00 - 16.30</div></div>
+    <div class="info-card"><div class="lbl">Ruang</div><div class="val">Gedung N</div></div>
+    <div class="info-card"><div class="lbl">Dosen Pengampu</div><div class="val">Bramantyo Adi Nugroho</div></div>
   </div>
 
   <div class="rps-banner">
     <div class="rps-text">
       <strong>📋 Rencana Pembelajaran Semester (RPS)</strong>
-      <span>Kontrak kuliah, capaian pembelajaran, dan bobot penilaian</span>
+      <span>capaian pembelajaran, dan bobot penilaian</span>
     </div>
     <!-- Ganti href="#" dengan link file RPS Anda -->
     <a href="#" class="btn btn-gold" onclick="alertFile('RPS Sistem Informasi Manajemen'); return false;">⬇ Unduh RPS</a>
@@ -213,7 +213,6 @@ hr { border: none; border-top: 1px solid var(--line); }
         <tr>
           <th>#</th>
           <th>Topik Pertemuan</th>
-          <th>Status</th>
           <th>Slide / Materi</th>
           <th>Referensi / Lainnya</th>
         </tr>
@@ -221,51 +220,44 @@ hr { border: none; border-top: 1px solid var(--line); }
       <tbody>
         <tr>
           <td>01</td>
-          <td><div class="topic-title">Pengantar Sistem Informasi Manajemen</div><div class="topic-desc">Definisi, ruang lingkup, dan peran SIM dalam organisasi modern</div></td>
-          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><div class="topic-title">Introduction to Information Systems</div></td>
           <td><a class="dl" href="#" onclick="alertFile('Slide 01'); return false;">⬇ Slide</a></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>02</td>
-          <td><div class="topic-title">Konsep Dasar Sistem dan Informasi</div><div class="topic-desc">Komponen sistem, kualitas informasi, hierarki data, dan siklus informasi</div></td>
-          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><div class="topic-title">Organization Strategy and Competitive Advantage</div></td>
           <td><a class="dl" href="#" onclick="alertFile('Slide 02'); return false;">⬇ Slide</a></td>
           <td><a class="dl" href="#" onclick="alertFile('Bahan Baca 02'); return false;">📄 Bahan Baca</a></td>
         </tr>
         <tr>
           <td>03</td>
-          <td><div class="topic-title">Infrastruktur Teknologi Informasi</div><div class="topic-desc">Hardware, software, jaringan komputer, dan komputasi awan</div></td>
-          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><div class="topic-title">Organization Strategy and Competitive Advantage</div></td>
           <td><a class="dl" href="#" onclick="alertFile('Slide 03'); return false;">⬇ Slide</a></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>04</td>
-          <td><div class="topic-title">Manajemen Basis Data</div><div class="topic-desc">DBMS, model relasional, data warehouse, dan big data</div></td>
-          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><div class="topic-title">Data and Knowledge Management</div></td>
           <td><a class="dl" href="#" onclick="alertFile('Slide 04'); return false;">⬇ Slide</a></td>
           <td><a class="dl" href="#" onclick="alertFile('Bahan Baca 04'); return false;">📄 Bahan Baca</a></td>
         </tr>
-        <!-- PERTEMUAN 5 - AKTIF -->
-        <tr class="row-active">
+        
+        <tr>
           <td>05</td>
-          <td><div class="topic-title">Sistem Pendukung Keputusan (DSS)</div><div class="topic-desc">Model DSS, komponen utama, dan implementasi di tingkat manajerial</div></td>
-          <td><span class="pill pill-now">▶ Berlangsung</span></td>
+          <td><div class="topic-title">Telecommunication and Networking</div></td>
           <td><a class="dl" href="#" onclick="alertFile('Slide 05'); return false;">⬇ Slide</a></td>
           <td><span class="na">Segera tersedia</span></td>
         </tr>
         <tr>
           <td>06</td>
-          <td><div class="topic-title">Business Intelligence &amp; Analytics</div><div class="topic-desc">BI tools, dashboard manajemen, dan pelaporan berbasis data</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Wireless, Mobile Computing, and Mobile Commerce &amp; Analytics</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>07</td>
-          <td><div class="topic-title">Sistem Informasi Fungsional</div><div class="topic-desc">SIM pemasaran, keuangan, SDM, dan operasi/produksi</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Information Security</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
@@ -279,50 +271,43 @@ hr { border: none; border-top: 1px solid var(--line); }
         </tr>
         <tr>
           <td>08</td>
-          <td><div class="topic-title">Enterprise Resource Planning (ERP)</div><div class="topic-desc">Konsep ERP, modul utama, dan studi kasus implementasi</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Information Systems within the Organization</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>09</td>
-          <td><div class="topic-title">E-Business &amp; E-Commerce</div><div class="topic-desc">Model bisnis digital, rantai pasok elektronik, dan strategi omnichannel</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Business Analytics</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>10</td>
-          <td><div class="topic-title">Keamanan Sistem Informasi</div><div class="topic-desc">Ancaman keamanan, kontrol, kebijakan SI, dan etika penggunaan TI</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Enterprise Resource Planning (ERP)</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>11</td>
-          <td><div class="topic-title">Manajemen Proyek Sistem Informasi</div><div class="topic-desc">SDLC, metodologi Agile vs Waterfall, dan perencanaan proyek SI</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Sistem Informasi Manajemen di Pemerintahan: Kolaborasi</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>12</td>
-          <td><div class="topic-title">Tata Kelola TI (IT Governance)</div><div class="topic-desc">COBIT, ITIL, dan keselarasan strategi bisnis dengan TI</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Sistem Informasi Manajemen di Pemerintahan: HRM</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>13</td>
-          <td><div class="topic-title">Tren &amp; Transformasi Digital</div><div class="topic-desc">AI, IoT, Big Data, dan dampak transformasi digital pada organisasi</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Sistem Informasi Manajemen di Pemerintahan</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
         <tr>
           <td>14</td>
-          <td><div class="topic-title">Presentasi Proyek Akhir &amp; Review</div><div class="topic-desc">Presentasi kelompok, diskusi studi kasus, dan review keseluruhan materi</div></td>
-          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><div class="topic-title">Acquiring Information Systems and Applications</div></td>
           <td><span class="na">—</span></td>
           <td><span class="na">—</span></td>
         </tr>
