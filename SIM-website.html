@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Informasi Manajemen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:    #0c1b33;
+  --navy2:   #1a2e4a;
+  --blue:    #1d5fa8;
+  --blue-lt: #e8f0fb;
+  --gold:    #c9922a;
+  --gold-lt: #fdf3e3;
+  --ink:     #1c1f2b;
+  --ink2:    #4a5068;
+  --ink3:    #8890a8;
+  --line:    #e4e7f0;
+  --bg:      #f7f8fc;
+  --white:   #ffffff;
+  --green:   #1a7a4a;
+  --green-lt:#e6f4ed;
+  --red:     #c0392b;
+  --red-lt:  #fde8e6;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.65; }
+
+/* TOPBAR */
+.topbar { background: var(--navy); color: #a8b4cc; font-size: 12px; font-family: 'IBM Plex Mono', monospace; padding: 6px 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.topbar a { color: #a8b4cc; text-decoration: none; }
+.topbar a:hover { color: white; }
+
+/* NAVBAR */
+nav { background: var(--white); border-bottom: 2px solid var(--line); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 58px; }
+.nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: var(--navy); text-decoration: none; letter-spacing: .04em; display: flex; align-items: center; gap: 10px; }
+.nav-logo::before { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; display: inline-block; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a { font-size: 13.5px; font-weight: 500; color: var(--ink2); text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: background .15s, color .15s; }
+.nav-links a:hover { background: var(--bg); color: var(--navy); }
+
+/* HERO */
+.hero { background: var(--navy); color: white; padding: 4.5rem 2rem 4rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+.hero::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--gold) 0%, var(--blue) 100%); }
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); background: rgba(201,146,42,.12); border: 1px solid rgba(201,146,42,.25); padding: 5px 14px; border-radius: 99px; margin-bottom: 1.4rem; }
+.hero h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.hero h1 span { color: #8aaff5; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.1); }
+.stat-val { font-family: 'IBM Plex Mono', monospace; font-size: 1.6rem; font-weight: 500; color: white; line-height: 1; margin-bottom: 3px; }
+.stat-lbl { font-size: 12px; color: #8899bb; text-transform: uppercase; letter-spacing: .07em; }
+
+/* LAYOUT */
+.container { max-width: 980px; margin: 0 auto; padding: 3rem 2rem; }
+.section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 1.5rem; }
+.section-head h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; color: var(--navy); }
+.section-head .line { flex: 1; height: 1px; background: var(--line); }
+
+/* INFO CARDS */
+.info-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+.info-card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; border-top: 3px solid var(--navy); }
+.info-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink3); margin-bottom: 4px; }
+.info-card .val { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500; color: var(--ink); }
+
+/* RPS BANNER */
+.rps-banner { background: linear-gradient(120deg, var(--navy) 0%, var(--navy2) 100%); border-radius: 12px; padding: 1.25rem 1.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; border-left: 4px solid var(--gold); }
+.rps-text strong { font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 1rem; color: white; display: block; margin-bottom: 3px; }
+.rps-text span { font-size: 13px; color: #8899bb; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 20px; border-radius: 7px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-gold { background: var(--gold); color: white; }
+.btn-gold:hover { background: #b07d20; transform: translateY(-1px); }
+.btn-blue { background: var(--blue); color: white; }
+.btn-blue:hover { background: #164a87; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--ink2); border: 1.5px solid var(--line); font-size: 12.5px; padding: 6px 13px; }
+.btn-outline:hover { border-color: var(--ink3); background: var(--bg); }
+
+/* TABLE */
+.tbl-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; background: var(--white); font-size: 14px; }
+thead tr { background: var(--navy); }
+thead th { padding: 13px 16px; text-align: left; color: #c8d4e8; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+thead th:first-child { width: 54px; text-align: center; }
+tbody tr { border-bottom: 1px solid var(--line); transition: background .12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #f8f9ff; }
+tbody tr.row-active { background: #eef4ff; }
+tbody tr.row-active td:first-child { border-left: 3px solid var(--blue); }
+tbody tr.row-exam { background: var(--gold-lt); }
+td { padding: 13px 16px; vertical-align: middle; color: var(--ink2); }
+td:first-child { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3); font-weight: 500; }
+.topic-title { font-weight: 600; color: var(--ink); font-size: 14px; line-height: 1.35; }
+.topic-desc { font-size: 12px; color: var(--ink3); margin-top: 3px; }
+.pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
+.pill-done  { background: var(--green-lt); color: var(--green); }
+.pill-now   { background: var(--blue-lt);  color: var(--blue); border: 1px solid #b8d0f5; }
+.pill-next  { background: var(--bg);       color: var(--ink3); border: 1px solid var(--line); }
+.pill-exam  { background: var(--gold-lt);  color: var(--gold); border: 1px solid #f0d09a; }
+.dl { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 5px 11px; border-radius: 6px; text-decoration: none; color: var(--ink2); background: var(--bg); border: 1px solid var(--line); transition: all .15s; cursor: pointer; white-space: nowrap; }
+.dl:hover { background: var(--blue); color: white; border-color: var(--blue); }
+.dl + .dl { margin-left: 5px; }
+.na { font-size: 12px; color: var(--ink3); font-style: italic; }
+
+/* TUGAS CARDS */
+.tugas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.tugas-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem 1.4rem; transition: box-shadow .15s, transform .15s; display: flex; flex-direction: column; gap: 10px; }
+.tugas-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.07); transform: translateY(-2px); }
+.tugas-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.tugas-week { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); }
+.status-open   { font-size: 10px; font-weight: 500; color: var(--green); background: var(--green-lt); padding: 2px 8px; border-radius: 99px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
+.status-closed { font-size: 10px; font-weight: 500; color: var(--red);   background: var(--red-lt);   padding: 2px 8px; border-radius: 99px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
+.status-soon   { font-size: 10px; font-weight: 500; color: var(--ink3);  background: var(--bg);        padding: 2px 8px; border-radius: 99px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; border: 1px solid var(--line); }
+.tugas-title { font-weight: 600; font-size: 14.5px; color: var(--ink); line-height: 1.35; }
+.tugas-deadline { font-size: 12px; color: var(--ink3); display: flex; align-items: center; gap: 5px; }
+
+/* MODAL */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(12,27,51,.6); z-index: 300; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(3px); }
+.overlay.show { display: flex; }
+.modal { background: white; border-radius: 16px; padding: 2rem 2rem 1.75rem; max-width: 460px; width: 100%; position: relative; animation: rise .22s ease; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; background: var(--bg); border: none; border-radius: 50%; cursor: pointer; font-size: 18px; color: var(--ink3); display: flex; align-items: center; justify-content: center; transition: background .12s; }
+.modal-close:hover { background: var(--line); }
+.modal-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 6px; }
+.modal h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
+.modal p { font-size: 13.5px; color: var(--ink2); line-height: 1.6; margin-bottom: 1.25rem; }
+.form-row { margin-bottom: 14px; }
+.form-row label { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
+.form-row input, .form-row select, .form-row textarea { width: 100%; padding: 9px 12px; border: 1.5px solid var(--line); border-radius: 8px; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; color: var(--ink); background: var(--bg); outline: none; transition: border-color .15s; }
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--blue); background: white; }
+.form-row textarea { resize: vertical; min-height: 72px; }
+.form-note { font-size: 11.5px; color: var(--ink3); margin-top: 4px; }
+.modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.5rem; }
+
+/* FOOTER */
+footer { background: var(--navy); color: #6a7a99; text-align: center; padding: 2.5rem 1rem; font-size: 13px; margin-top: 5rem; }
+footer strong { color: #c8d4e8; font-weight: 600; }
+.footer-brand { font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 500; color: white; margin-bottom: 8px; letter-spacing: .04em; }
+hr { border: none; border-top: 1px solid var(--line); }
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero { padding: 2.75rem 1.25rem 2.5rem; }
+  .container { padding: 2rem 1.25rem; }
+  thead th:nth-child(5), td:nth-child(5) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Program Studi Manajemen &nbsp;·&nbsp; Semester Ganjil 2025/2026</span>
+  <span><a href="mailto:dosen@kampus.ac.id">✉ dosen@kampus.ac.id</a></span>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">SIM — 2025/2026</a>
+  <div class="nav-links">
+    <a href="#jadwal">Jadwal &amp; Materi</a>
+    <a href="#tugas">Submit Tugas</a>
+    <a href="#info">Info Matkul</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Repository Perkuliahan</div>
+    <h1>Sistem <span>Informasi</span><br>Manajemen</h1>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-val">14</div><div class="stat-lbl">Pertemuan</div></div>
+      <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">SKS</div></div>
+      <div class="stat"><div class="stat-val">2025</div><div class="stat-lbl">Tahun Ajaran</div></div>
+      <div class="stat"><div class="stat-val">Ganjil</div><div class="stat-lbl">Semester</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO MATKUL -->
+<div class="container" id="info">
+  <div class="section-head"><h2>Informasi Mata Kuliah</h2><div class="line"></div></div>
+  <div class="info-row">
+    <div class="info-card"><div class="lbl">Kode Matkul</div><div class="val">MKK-SIM-301</div></div>
+    <div class="info-card"><div class="lbl">Hari / Jam</div><div class="val">Selasa 08:00</div></div>
+    <div class="info-card"><div class="lbl">Ruang</div><div class="val">Gedung A · R.204</div></div>
+    <div class="info-card"><div class="lbl">Dosen Pengampu</div><div class="val">[Nama Dosen]</div></div>
+  </div>
+
+  <div class="rps-banner">
+    <div class="rps-text">
+      <strong>📋 Rencana Pembelajaran Semester (RPS)</strong>
+      <span>Kontrak kuliah, capaian pembelajaran, dan bobot penilaian</span>
+    </div>
+    <!-- Ganti href="#" dengan link file RPS Anda -->
+    <a href="#" class="btn btn-gold" onclick="alertFile('RPS Sistem Informasi Manajemen'); return false;">⬇ Unduh RPS</a>
+  </div>
+</div>
+
+<hr>
+
+<!-- JADWAL & MATERI -->
+<div class="container" id="jadwal">
+  <div class="section-head"><h2>Jadwal &amp; Bahan Perkuliahan</h2><div class="line"></div></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Topik Pertemuan</th>
+          <th>Status</th>
+          <th>Slide / Materi</th>
+          <th>Referensi / Lainnya</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td><div class="topic-title">Pengantar Sistem Informasi Manajemen</div><div class="topic-desc">Definisi, ruang lingkup, dan peran SIM dalam organisasi modern</div></td>
+          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><a class="dl" href="#" onclick="alertFile('Slide 01'); return false;">⬇ Slide</a></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td><div class="topic-title">Konsep Dasar Sistem dan Informasi</div><div class="topic-desc">Komponen sistem, kualitas informasi, hierarki data, dan siklus informasi</div></td>
+          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><a class="dl" href="#" onclick="alertFile('Slide 02'); return false;">⬇ Slide</a></td>
+          <td><a class="dl" href="#" onclick="alertFile('Bahan Baca 02'); return false;">📄 Bahan Baca</a></td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td><div class="topic-title">Infrastruktur Teknologi Informasi</div><div class="topic-desc">Hardware, software, jaringan komputer, dan komputasi awan</div></td>
+          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><a class="dl" href="#" onclick="alertFile('Slide 03'); return false;">⬇ Slide</a></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td><div class="topic-title">Manajemen Basis Data</div><div class="topic-desc">DBMS, model relasional, data warehouse, dan big data</div></td>
+          <td><span class="pill pill-done">✔ Selesai</span></td>
+          <td><a class="dl" href="#" onclick="alertFile('Slide 04'); return false;">⬇ Slide</a></td>
+          <td><a class="dl" href="#" onclick="alertFile('Bahan Baca 04'); return false;">📄 Bahan Baca</a></td>
+        </tr>
+        <!-- PERTEMUAN 5 - AKTIF -->
+        <tr class="row-active">
+          <td>05</td>
+          <td><div class="topic-title">Sistem Pendukung Keputusan (DSS)</div><div class="topic-desc">Model DSS, komponen utama, dan implementasi di tingkat manajerial</div></td>
+          <td><span class="pill pill-now">▶ Berlangsung</span></td>
+          <td><a class="dl" href="#" onclick="alertFile('Slide 05'); return false;">⬇ Slide</a></td>
+          <td><span class="na">Segera tersedia</span></td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td><div class="topic-title">Business Intelligence &amp; Analytics</div><div class="topic-desc">BI tools, dashboard manajemen, dan pelaporan berbasis data</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td><div class="topic-title">Sistem Informasi Fungsional</div><div class="topic-desc">SIM pemasaran, keuangan, SDM, dan operasi/produksi</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <!-- UTS -->
+        <tr class="row-exam">
+          <td>UTS</td>
+          <td><div class="topic-title" style="color:var(--gold)">Ujian Tengah Semester</div><div class="topic-desc">Cakupan materi pertemuan 1–7</div></td>
+          <td><span class="pill pill-exam">📝 Ujian</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">Informasi menyusul</span></td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td><div class="topic-title">Enterprise Resource Planning (ERP)</div><div class="topic-desc">Konsep ERP, modul utama, dan studi kasus implementasi</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>09</td>
+          <td><div class="topic-title">E-Business &amp; E-Commerce</div><div class="topic-desc">Model bisnis digital, rantai pasok elektronik, dan strategi omnichannel</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><div class="topic-title">Keamanan Sistem Informasi</div><div class="topic-desc">Ancaman keamanan, kontrol, kebijakan SI, dan etika penggunaan TI</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><div class="topic-title">Manajemen Proyek Sistem Informasi</div><div class="topic-desc">SDLC, metodologi Agile vs Waterfall, dan perencanaan proyek SI</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><div class="topic-title">Tata Kelola TI (IT Governance)</div><div class="topic-desc">COBIT, ITIL, dan keselarasan strategi bisnis dengan TI</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><div class="topic-title">Tren &amp; Transformasi Digital</div><div class="topic-desc">AI, IoT, Big Data, dan dampak transformasi digital pada organisasi</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><div class="topic-title">Presentasi Proyek Akhir &amp; Review</div><div class="topic-desc">Presentasi kelompok, diskusi studi kasus, dan review keseluruhan materi</div></td>
+          <td><span class="pill pill-next">Akan Datang</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">—</span></td>
+        </tr>
+        <!-- UAS -->
+        <tr class="row-exam">
+          <td>UAS</td>
+          <td><div class="topic-title" style="color:var(--gold)">Ujian Akhir Semester</div><div class="topic-desc">Cakupan materi pertemuan 8–14</div></td>
+          <td><span class="pill pill-exam">📝 Ujian</span></td>
+          <td><span class="na">—</span></td>
+          <td><span class="na">Informasi menyusul</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- SUBMIT TUGAS -->
+<div class="container" id="tugas">
+  <div class="section-head"><h2>Submit Tugas</h2><div class="line"></div></div>
+  <p style="font-size:13.5px;color:var(--ink2);margin-bottom:1.5rem;">
+    Klik tombol <strong>Submit</strong> pada tugas yang sesuai. Pastikan mengisi nama, NIM, dan mengunggah file sebelum batas waktu.
+  </p>
+  <div class="tugas-grid">
+
+    <div class="tugas-card">
+      <div class="tugas-header">
+        <div class="tugas-week">Tugas I · Minggu 2</div>
+        <span class="status-closed">✕ Ditutup</span>
+      </div>
+      <div class="tugas-title">Analisis Komponen SIM pada Perusahaan Pilihan</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 10 Ags 2025</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="openModal('Tugas I · Minggu 2','Analisis Komponen SIM pada Perusahaan Pilihan',true)">Submit Tugas</button>
+    </div>
+
+    <div class="tugas-card">
+      <div class="tugas-header">
+        <div class="tugas-week">Tugas II · Minggu 4</div>
+        <span class="status-closed">✕ Ditutup</span>
+      </div>
+      <div class="tugas-title">Review Jurnal: Implementasi DBMS di Organisasi</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 24 Ags 2025</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="openModal('Tugas II · Minggu 4','Review Jurnal: Implementasi DBMS di Organisasi',true)">Submit Tugas</button>
+    </div>
+
+    <div class="tugas-card" style="border-color:#b8d0f5;border-width:2px;">
+      <div class="tugas-header">
+        <div class="tugas-week">Tugas III · Minggu 5</div>
+        <span class="status-open">● Terbuka</span>
+      </div>
+      <div class="tugas-title">Studi Kasus Penerapan DSS di Industri</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 7 Sep 2025</div>
+      <button class="btn btn-blue" style="width:100%;justify-content:center;" onclick="openModal('Tugas III · Minggu 5','Studi Kasus Penerapan DSS di Industri',false)">Submit Tugas</button>
+    </div>
+
+    <div class="tugas-card">
+      <div class="tugas-header">
+        <div class="tugas-week">Tugas IV · Minggu 7</div>
+        <span class="status-soon">Segera</span>
+      </div>
+      <div class="tugas-title">Perancangan Dashboard BI untuk Manajer Puncak</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 21 Sep 2025</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;opacity:.45;pointer-events:none;">Belum Dibuka</button>
+    </div>
+
+    <div class="tugas-card">
+      <div class="tugas-header">
+        <div class="tugas-week">Tugas V · Minggu 10</div>
+        <span class="status-soon">Segera</span>
+      </div>
+      <div class="tugas-title">Analisis Keamanan SI: Studi Kasus Kebocoran Data</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 12 Okt 2025</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;opacity:.45;pointer-events:none;">Belum Dibuka</button>
+    </div>
+
+    <div class="tugas-card">
+      <div class="tugas-header">
+        <div class="tugas-week">Proyek Akhir · Minggu 14</div>
+        <span class="status-soon">Segera</span>
+      </div>
+      <div class="tugas-title">Laporan &amp; Presentasi Perancangan SIM untuk Organisasi</div>
+      <div class="tugas-deadline">📅 Deadline: Minggu, 16 Nov 2025</div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;opacity:.45;pointer-events:none;">Belum Dibuka</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SIM · 2025/2026</div>
+  <p>Sistem Informasi Manajemen &nbsp;·&nbsp; Program Studi Manajemen</p>
+  <p style="margin-top:6px;"><strong>[Nama Institusi]</strong> &nbsp;·&nbsp; Semester Ganjil 2025/2026</p>
+  <p style="margin-top:16px;font-size:11.5px;">Dikelola dosen pengampu — diperbarui setiap minggu</p>
+</footer>
+
+<!-- MODAL SUBMIT -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-eyebrow" id="mEyebrow">Pengumpulan Tugas</div>
+    <h3 id="mTitle">—</h3>
+    <p id="mDesc">Isi formulir berikut untuk mengumpulkan tugas Anda. Pastikan file sudah dalam format yang diminta.</p>
+    <div id="mClosed" style="display:none;background:var(--red-lt);color:var(--red);padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;">
+      ⚠ Batas waktu pengumpulan tugas ini telah berakhir.
+    </div>
+    <div class="form-row"><label>Nama Lengkap *</label><input type="text" placeholder="Masukkan nama lengkap"></div>
+    <div class="form-row"><label>NIM *</label><input type="text" placeholder="Contoh: 2021001234"></div>
+    <div class="form-row">
+      <label>Kelas</label>
+      <select><option value="">— Pilih Kelas —</option><option>Kelas A</option><option>Kelas B</option><option>Kelas C</option></select>
+    </div>
+    <div class="form-row">
+      <label>Upload File *</label>
+      <input type="file" accept=".pdf,.zip,.docx,.xlsx,.pptx">
+      <div class="form-note">Format: PDF, DOCX, PPTX, XLSX, atau ZIP. Maks 20 MB.</div>
+    </div>
+    <div class="form-row"><label>Catatan (opsional)</label><textarea placeholder="Tulis keterangan jika diperlukan"></textarea></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-blue" id="mSubmitBtn" onclick="doSubmit()">Kirim Tugas</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(week, title, isClosed) {
+  document.getElementById('mEyebrow').textContent = week;
+  document.getElementById('mTitle').textContent = title;
+  document.getElementById('mClosed').style.display = isClosed ? 'block' : 'none';
+  var btn = document.getElementById('mSubmitBtn');
+  btn.disabled = isClosed;
+  btn.style.opacity = isClosed ? '.4' : '1';
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function doSubmit() {
+  // ── CARA PAKAI ──────────────────────────────────────────────────────────
+  // 1. Buat Google Form di forms.google.com
+  // 2. Klik tombol "Send" → salin link
+  // 3. Ganti URL di bawah ini dengan link Google Form Anda
+  // ────────────────────────────────────────────────────────────────────────
+  var googleFormUrl = 'https://forms.google.com/GANTI-DENGAN-LINK-FORM-ANDA';
+  window.open(googleFormUrl, '_blank');
+  closeModal();
+}
+function alertFile(name) {
+  // Ganti href="#" di setiap tombol ⬇ Slide / 📄 Bahan Baca
+  // dengan URL file langsung, contoh:
+  //   GitHub raw: https://github.com/username/repo/raw/main/slides/01.pptx
+  //   Google Drive: https://drive.google.com/uc?export=download&id=FILE_ID
+  alert('📁 Untuk mengaktifkan download "' + name + '":\n\nGanti href="#" pada tombol ini dengan URL file Anda.\nContoh: GitHub raw link atau Google Drive share link.');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
